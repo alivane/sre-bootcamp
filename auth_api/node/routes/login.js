@@ -1,12 +1,22 @@
 import { loginFunction } from '../services/login';
 
-export const login = (req, res, next) => {
-  let username = req.body.username;
-  let password = req.body.password;
- 
+export const login = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (!(username && password)) {
+    return res.status(403).send("All parameters is required");
+  }
+  
+  const get_response = await loginFunction(username, password);
+
+  if (get_response === 403) {
+    return res.status(403).send("Username or Password did not found");
+  }
+
   let response = {
-    "data": loginFunction(username, password)
+    "data": await get_response
   };
-  res.send(response);
-  next();
+  
+  return res.send(response);
+  // next();
 }

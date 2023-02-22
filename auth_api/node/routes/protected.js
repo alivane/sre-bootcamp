@@ -1,10 +1,17 @@
 import { protectFunction } from '../services/protected';
 
-export const protect = (req, res, next) => {
+export const protect = async (req, res) => {
   let authorization = req.headers.authorization;
-  let response = {
-    "data": protectFunction(authorization)
+
+  if (!authorization) return res.status(403).send("Autherization is required");
+
+  const responseToken = await protectFunction(authorization);
+
+  if (responseToken === 403) return res.status(403).send("Invalid Token");
+  
+  const response = {
+    "data": "You are under protected data"
   };
-  res.send(response);
-  next();
+  
+  return res.send(response);
 }

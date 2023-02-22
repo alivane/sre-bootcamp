@@ -1,4 +1,11 @@
 {
   "port" : 8000,
-  "environment": "development"
+  "environment": "development",
+  "DATABASE_URI": {
+    "host": "sre-bootcamp-selection-challenge.cabf3yhjqvmq.us-east-1.rds.amazonaws.com",
+    "user": "secret",
+    "password": "jOdznoyH6swQB9sTGdLUeeSrtejWkcw",
+    "database": "bootcamp_tht"
+  },
+  "TOKEN_KEY": "my2w7wjd7yXF64FIADfJxNs1oupTGAuW"
 }
